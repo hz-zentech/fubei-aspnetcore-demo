@@ -1,7 +1,7 @@
 # 付呗生活圈开放平台公众号支付demo
 
 ## 项目简介
-该项目基于ASP.NET core MVC 1.1框架开发，实现了付呗生活圈开放平台的公众号授权、支付、回调通知等业务逻辑。点击查看[付呗生活圈开放平台接口文档](apihttps://www.gitbook.com/book/fubei/lifecircleopen-api)
+该项目基于ASP.NET core MVC 1.1框架开发，实现了付呗生活圈开放平台的公众号授权、支付、回调通知等业务逻辑。点击查看[付呗生活圈开放平台接口文档](https://www.gitbook.com/book/fubei/lifecircleopen-api)
 
 ### 项目依赖
 >* .Net Core 1.0
