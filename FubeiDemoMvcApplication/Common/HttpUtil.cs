@@ -18,14 +18,7 @@ namespace FubeiDemoMvcApplication.Common
     /// </summary>
     public class HttpUtil
     {
-        /// <summary>
-        /// 包含HttpClient的ThreadLocal对象
-        /// </summary>
-        private static readonly ThreadLocal<HttpClient> _tlHttpClient = new ThreadLocal<HttpClient>(() =>
-        {
-            var client = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
-            return client;
-        });
+        private static readonly HttpClient HttpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(30)};
 
         private IHostingEnvironment _hostingEnvironment;
         
@@ -36,7 +29,7 @@ namespace FubeiDemoMvcApplication.Common
 
         public static async Task<string> PostRequest(string url, JsonRequestParam jsonRequestParam)
         {
-            var httpClient = _tlHttpClient.Value;
+            var httpClient = HttpClient;
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var content = new StringContent(JsonConvert.SerializeObject(jsonRequestParam), Encoding.UTF8, "application/json");
