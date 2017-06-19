@@ -60,7 +60,7 @@ IDE调试时，默认为生成环境，无法调试本项目，如需对调试�
 ![设置开发模式环境变量](http://hz-zentech-github.oss-cn-shanghai.aliyuncs.com/fubei-aspnetcore-demo/1497869624008.png)
 
 #### 修改付呗回调地址与项目配置文件
-访问付呗接口配置页面http://sh.51youdian.com/User/OpenApiConfig/detail（需登录），并将回调地址配成 **http://域名/notify**
+访问付呗接口配置页面[http://sh.51youdian.com/User/OpenApiConfig/detail](http://sh.51youdian.com/User/OpenApiConfig/detail)（需登录），并将回调地址配成 **http://域名/notify**
 ![接口配置](http://hz-zentech-github.oss-cn-shanghai.aliyuncs.com/fubei-aspnetcore-demo/1497886147121.png)
 
 之后请修改appsettings.json/appsettings.Development.json文件中的ApplicationConfiguration节，修改AppId和AppSecret为从生活圈文档中获得的AppId和AppSecret
