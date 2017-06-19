@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.muicss.com/mui-0.9.16/css/mui.min.css" rel="stylesheet" type="text/css"/>
+    <script src="//cdn.muicss.com/mui-0.9.16/js/mui.min.js"></script>
+
+    <title>微信公众号支付测试</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        html,
+        body,
+        input,
+        textarea,
+        buttons {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="mui-appbar mui--z1">
+        <div class="mui-container">
+            <table width="100%">
+                <tr class="mui--appbar-height">
+                    <td class="mui--text-title">微信公众号支付测试页</td>
+                </tr>
+            </table>
+        </div>
+    </header>
+    <div class="mui-container">
+    <div id="content-wrapper" class="mui--text-justify">
+        <div class="mui--appbar-height"></div>
+        <br>
+        <div class="mui-mui-panel">
+        <form class="mui-form">
+            <div class="mui-textfield">
+                <input type="text" required id="open_id" readonly name="open_id">
+                <label>open_id</label>
+            </div>
+            <div class="mui-textfield">
+                <input type="text" required id="sub_open_id" readonly name="sub_open_id">
+                <label>sub_open_id</label>
+            </div>
+            <div class="mui-textfield">
+                <input type="text" required id="total_fee" name="total_fee">
+                <label>订单金额(元)</label>
+            </div>
+            <div class="mui-textfield">
+                <input type="text" id="store_id" name="store_id">
+                <label>门店ID,当存在多个门店时,此字段必填</label>
+            </div>
+            <div class="mui-textfield">
+                <input type="text" id="cashier_id" name="cashier_id">
+                <label>收银员ID（非必填）</label>
+            </div>
+        </form>
+        <button class="mui-btn mui-btn--raised mui-btn--primary" id="btn-pay" style="float:right">支付</button>
+        </div>
+    </div>
+    </div>
+</body>
+<script type='text/javascript' src='js/JSLite.min.js' charset='utf-8'></script>
+<script>
+    function redirectPayPage(prepay_id) {
+        var url = 'https://shq-api.51fubei.com/paypage' + '?' + $.param({
+                prepay_id: prepay_id,
+                callback_url: 'https://www.baidu.com',
+                cancel_url: encodeURIComponent(location.href)
+            });
+        alert(url);
+        location.href = url;
+    }
+
+    $(function() {
+        $('#open_id').val($.getUrlParam("open_id"));
+        $('#sub_open_id').val($.getUrlParam("sub_open_id"));
+        $('#btn-pay').on('click', function() {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                data: $('form').serialize(),
+                url: '/api/order/h5pay',
+                success: function (data) {
+                    console.log('success:', JSON.stringify(data));
+                    redirectPayPage(data.data.prepay_id);
+                },
+                error: function (d) {
+                    console.log('error:', d);
+                }
+            })
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>跳转中</title>
+</head>
+<body>
+</body>
+<script type='text/javascript' src='js/JSLite.min.js' charset='utf-8'></script>
+<script>
+    $(function() {
+        $.ajax({
+            type: 'GET',
+            url: '/api/auth/authorize',
+            data: {
+                returnUrl: [location.protocol + '/', location.host, 'wxpay.html'].join('/')
+            },
+            dataType: 'json',
+            success: function (data, status, xhr) {
+                if (data.result_code == 200) {
+                    alert(data.data.authUrl);
+                    location.href = data.data.authUrl;
+                } else {
+                    alert(data.result_message);
+                }
+            },
+            error: function (xhr, errorType, error) {
+            }
+        });
+    });
+</script>
+</html>
